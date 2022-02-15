@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:id="@+id/animated_view"
+    android:layout_margin="@dimen/_2sdp"
+    android:layout_height="match_parent">
+
+    <com.cunoraz.continuouscrollable.ContinuousScrollableImageView
+        android:layout_marginTop="-50dp"
+        android:padding="10dp"
+        android:layout_marginBottom="-50dp"
+        android:scaleY="1.5"
+        android:scaleX="1.5"
+        app:duration="10000"
+        app:imageSrc="@drawable/prem_banner_column_3"
+        android:id="@+id/prem_banner_column"
+        android:layout_width="100dp"
+        android:layout_height="match_parent"
+        android:adjustViewBounds="true"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</FrameLayout>

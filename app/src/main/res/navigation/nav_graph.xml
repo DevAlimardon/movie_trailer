@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/splashScreen">
+
+    <fragment
+        android:id="@+id/splashScreen"
+        tools:layout="@layout/screen_splash"
+        android:name="uz.infinityandro.moviestream.presenter.fragments.SplashScreen"
+        android:label="SplashScreen" >
+        <action
+            android:id="@+id/action_splashScreen_to_mainGraph"
+            app:destination="@id/mainGraph"
+            app:popUpTo="@id/nav_graph"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <navigation
+        android:id="@+id/mainGraph"
+        app:startDestination="@id/mainScreen">
+
+        <fragment
+            tools:layout="@layout/screen_main"
+            android:id="@+id/mainScreen"
+            android:name="uz.infinityandro.moviestream.presenter.fragments.MainScreen"
+            android:label="MainScreen" >
+            <action
+                android:id="@+id/action_mainScreen_to_searchScreen"
+                app:destination="@id/searchScreen" />
+            <action
+                android:id="@+id/action_mainScreen_to_pageDetail"
+                app:destination="@id/pageDetail" />
+        </fragment>
+        <fragment
+            tools:layout="@layout/screen_search"
+            android:id="@+id/searchScreen"
+            android:name="uz.infinityandro.moviestream.presenter.fragments.SearchScreen"
+            android:label="SearchScreen" />
+        <fragment
+            android:id="@+id/pageDetail"
+            tools:layout="@layout/page_detail"
+            android:name="uz.infinityandro.moviestream.presenter.pages.PageDetail"
+            android:label="PageDetail" >
+            <action
+                android:id="@+id/action_pageDetail_to_pageActors"
+                app:destination="@id/pageActors" />
+            <action
+                android:id="@+id/action_pageDetail_self"
+                app:destination="@id/pageDetail" />
+        </fragment>
+        <fragment
+            tools:layout="@layout/page_actors"
+            android:id="@+id/pageActors"
+            android:name="uz.infinityandro.moviestream.presenter.pages.PageActors"
+            android:label="PageActors" />
+    </navigation>
+</navigation>
