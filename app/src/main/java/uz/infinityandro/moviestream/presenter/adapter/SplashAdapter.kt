@@ -5,10 +5,9 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.cunoraz.continuouscrollable.ContinuousScrollableImageView
-import uz.infinityandro.moviestream.R
 import uz.infinityandro.moviestream.databinding.ItemSplashBinding
 
-class SplashAdapter:RecyclerView.Adapter<SplashAdapter.VH>() {
+class SplashAdapter : RecyclerView.Adapter<SplashAdapter.VH>() {
     private val banners: ArrayList<Int> = ArrayList()
 
     @SuppressLint("NotifyDataSetChanged")
@@ -18,7 +17,7 @@ class SplashAdapter:RecyclerView.Adapter<SplashAdapter.VH>() {
         notifyDataSetChanged()
     }
 
-    inner  class VH(var binding: ItemSplashBinding):RecyclerView.ViewHolder(binding.root){
+    inner class VH(var binding: ItemSplashBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(i: Int, position: Int) {
             if (position == 1 || position == 3) binding.premBannerColumn.setPadding(0, 100, 0, 0)
             if (position == 1 || position == 3) binding.premBannerColumn.setDirection(
@@ -32,11 +31,11 @@ class SplashAdapter:RecyclerView.Adapter<SplashAdapter.VH>() {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VH {
-        return VH(ItemSplashBinding.inflate(LayoutInflater.from(parent.context),parent,false))
+        return VH(ItemSplashBinding.inflate(LayoutInflater.from(parent.context), parent, false))
     }
 
     override fun onBindViewHolder(holder: VH, position: Int) {
-        holder.bind(banners[position],position)
+        holder.bind(banners[position], position)
     }
 
     override fun getItemCount(): Int {

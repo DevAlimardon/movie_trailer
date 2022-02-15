@@ -14,9 +14,9 @@ import com.bumptech.glide.request.target.Target
 import uz.infinityandro.moviestream.app.App
 import uz.infinityandro.moviestream.databinding.ItemAnyBinding
 import uz.infinityandro.moviestream.domain.data.ItemSoon
-import uz.infinityandro.moviestream.domain.data.ItemsItem
 
-class ComingAdapter(var listener:(model:ItemSoon)->Unit) :RecyclerView.Adapter<ComingAdapter.VH>(){
+class ComingAdapter(var listener: (model: ItemSoon) -> Unit) :
+    RecyclerView.Adapter<ComingAdapter.VH>() {
     private val banners: ArrayList<ItemSoon> = ArrayList()
 
     @SuppressLint("NotifyDataSetChanged")
@@ -31,27 +31,28 @@ class ComingAdapter(var listener:(model:ItemSoon)->Unit) :RecyclerView.Adapter<C
             root.setOnClickListener {
                 listener(itemsItem)
             }
-            Glide.with(App.instance).load(itemsItem.image).listener(object :RequestListener<Drawable>{
-                override fun onLoadFailed(
-                    e: GlideException?,
-                    model: Any?,
-                    target: Target<Drawable>?,
-                    isFirstResource: Boolean
-                ): Boolean {
-                    return true
-                }
+            Glide.with(App.instance).load(itemsItem.image)
+                .listener(object : RequestListener<Drawable> {
+                    override fun onLoadFailed(
+                        e: GlideException?,
+                        model: Any?,
+                        target: Target<Drawable>?,
+                        isFirstResource: Boolean
+                    ): Boolean {
+                        return true
+                    }
 
-                override fun onResourceReady(
-                    resource: Drawable?,
-                    model: Any?,
-                    target: Target<Drawable>?,
-                    dataSource: DataSource?,
-                    isFirstResource: Boolean
-                ): Boolean {
-                    return false
-                }
+                    override fun onResourceReady(
+                        resource: Drawable?,
+                        model: Any?,
+                        target: Target<Drawable>?,
+                        dataSource: DataSource?,
+                        isFirstResource: Boolean
+                    ): Boolean {
+                        return false
+                    }
 
-            })
+                })
                 .format(DecodeFormat.PREFER_RGB_565)
                 .override(Target.SIZE_ORIGINAL)
                 .into(imageAny)

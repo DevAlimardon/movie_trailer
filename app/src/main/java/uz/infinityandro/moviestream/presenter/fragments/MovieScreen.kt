@@ -9,24 +9,42 @@ import uz.infinityandro.moviestream.R
 import uz.infinityandro.moviestream.databinding.ScreenMovieBinding
 import uz.infinityandro.moviestream.presenter.adapter.MovieAdapter
 
-class MovieScreen:Fragment(R.layout.screen_movie) {
-private val binding by viewBinding(ScreenMovieBinding::bind)
+class MovieScreen : Fragment(R.layout.screen_movie) {
+    private val binding by viewBinding(ScreenMovieBinding::bind)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val adapter=MovieAdapter(childFragmentManager,lifecycle)
-        binding.viewPage.adapter=adapter
+        val adapter = MovieAdapter(childFragmentManager, lifecycle)
+        binding.viewPage.adapter = adapter
 
-        TabLayoutMediator(binding.tabLayout,binding.viewPage){tab, position->
-            when(position){
-                0->{tab.text="Movies"}
-                1->{tab.text="Coming Soon"}
-                2->{tab.text="Documentary"}
-                3->{tab.text="Drama"}
-                4->{tab.text="Fantasy"}
-                5->{tab.text="Horror"}
-                6->{tab.text="Action"}
-                7->{tab.text="Romance"}
-                else->{tab.text="Sport"}
+        TabLayoutMediator(binding.tabLayout, binding.viewPage) { tab, position ->
+            when (position) {
+                0 -> {
+                    tab.text = "Movies"
+                }
+                1 -> {
+                    tab.text = "Coming Soon"
+                }
+                2 -> {
+                    tab.text = "Documentary"
+                }
+                3 -> {
+                    tab.text = "Drama"
+                }
+                4 -> {
+                    tab.text = "Fantasy"
+                }
+                5 -> {
+                    tab.text = "Horror"
+                }
+                6 -> {
+                    tab.text = "Action"
+                }
+                7 -> {
+                    tab.text = "Romance"
+                }
+                else -> {
+                    tab.text = "Sport"
+                }
             }
 
         }.attach()

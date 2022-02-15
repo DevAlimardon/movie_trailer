@@ -4,7 +4,10 @@ import android.content.IntentFilter
 import android.net.ConnectivityManager
 import android.net.wifi.WifiManager
 import android.os.Bundle
+import android.util.Log
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -87,20 +90,26 @@ class HomeScreen : Fragment(R.layout.screen_home) {
             receiver,
             IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION)
         )
-        requireContext().registerReceiver(receiver, IntentFilter(WifiManager.WIFI_STATE_CHANGED_ACTION))
+        requireContext().registerReceiver(
+            receiver,
+            IntentFilter(WifiManager.WIFI_STATE_CHANGED_ACTION)
+        )
         receiver.setListener {
-            if (it){
+            if (it) {
                 viewModel.getMostPopular()
                 viewModel.getMarvel()
-            }
-            }
-        receiver.setNetwork {
-            if (it){
-                viewModel.getMostPopular()
-                viewModel.getMarvel()
+                return@setListener
             }
         }
-
+        receiver.setNetwork {
+            if (it) {
+                viewModel.getMostPopular()
+                viewModel.getMarvel()
+                return@setNetwork
+            }
+        }
+        viewModel.getMostPopular()
+        viewModel.getMarvel()
     }
 
 
@@ -163,6 +172,50 @@ class HomeScreen : Fragment(R.layout.screen_home) {
         }.launchIn(lifecycleScope)
 
 
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        Log.d("TTTT", "onCreate: ")
+    }
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        return super.onCreateView(inflater, container, savedInstanceState)
+        Log.d("TTTT", "onCreateView: ")
+    }
+
+    override fun onStart() {
+        super.onStart()
+        Log.d("TTTT", "onStart: ")
+    }
+
+    override fun onResume() {
+        super.onResume()
+        Log.d("TTTT", "onResume: ")
+    }
+
+    override fun onPause() {
+        super.onPause()
+        Log.d("TTTT", "onPause: ")
+    }
+
+    override fun onStop() {
+        super.onStop()
+        Log.d("TTTT", "onStop: ")
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        Log.d("TTTT", "onDestroyView: ")
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        Log.d("TTTT", "onDestroy: ")
     }
 
 

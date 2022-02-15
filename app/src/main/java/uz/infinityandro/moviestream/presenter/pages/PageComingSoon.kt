@@ -17,7 +17,6 @@ import uz.infinityandro.moviestream.databinding.PageComingSoonBinding
 import uz.infinityandro.moviestream.presenter.adapter.ComingAdapter
 import uz.infinityandro.moviestream.presenter.viewmodel.ComingModel
 import uz.infinityandro.moviestream.presenter.viewmodel.impl.ComingModelImpl
-import uz.infinityandro.moviestream.util.Constants
 import uz.infinityandro.moviestream.util.InternetBroadCast
 import uz.infinityandro.moviestream.utils.showToast
 
@@ -49,15 +48,16 @@ class PageComingSoon : Fragment(R.layout.page_coming_soon) {
         receiver.setListener {
             if (it) {
                 viewModel.getMovie()
+                return@setListener
             }
         }
         receiver.setNetwork {
             if (it) {
                 viewModel.getMovie()
-            } else {
-
+                return@setNetwork
             }
         }
+        viewModel.getMovie()
     }
 
     private fun viewModelListeners() = with(binding) {

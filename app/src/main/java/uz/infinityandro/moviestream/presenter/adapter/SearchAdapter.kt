@@ -9,7 +9,8 @@ import uz.infinityandro.moviestream.app.App
 import uz.infinityandro.moviestream.databinding.ItemSearchBinding
 import uz.infinityandro.moviestream.domain.data.ResultsItem
 
-class SearchAdapter(var listener:(model:ResultsItem)->Unit) :RecyclerView.Adapter<SearchAdapter.VH>(){
+class SearchAdapter(var listener: (model: ResultsItem) -> Unit) :
+    RecyclerView.Adapter<SearchAdapter.VH>() {
     private val banners: ArrayList<ResultsItem> = ArrayList()
 
     @SuppressLint("NotifyDataSetChanged")
@@ -18,20 +19,21 @@ class SearchAdapter(var listener:(model:ResultsItem)->Unit) :RecyclerView.Adapte
         this.banners.addAll(banners)
         notifyDataSetChanged()
     }
- inner class VH(val binding:ItemSearchBinding):RecyclerView.ViewHolder(binding.root) {
-     fun bind(resultsItem: ResultsItem)= with(binding){
-         Glide.with(App.instance).load(resultsItem.image).into(image)
-         name.setText(resultsItem.title)
-         year.setText(resultsItem.description)
-         root.setOnClickListener {
-             listener(resultsItem)
-         }
-     }
 
- }
+    inner class VH(val binding: ItemSearchBinding) : RecyclerView.ViewHolder(binding.root) {
+        fun bind(resultsItem: ResultsItem) = with(binding) {
+            Glide.with(App.instance).load(resultsItem.image).into(image)
+            name.text = resultsItem.title
+            year.text = resultsItem.description
+            root.setOnClickListener {
+                listener(resultsItem)
+            }
+        }
+
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VH {
-        return VH(ItemSearchBinding.inflate(LayoutInflater.from(parent.context),parent,false))
+        return VH(ItemSearchBinding.inflate(LayoutInflater.from(parent.context), parent, false))
     }
 
     override fun onBindViewHolder(holder: VH, position: Int) {

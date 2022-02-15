@@ -11,7 +11,7 @@ import uz.infinityandro.moviestream.app.App
 import uz.infinityandro.moviestream.databinding.ItemAnyBinding
 import uz.infinityandro.moviestream.domain.data.ItemsItem
 
-class AnyAdapter(val listener:(model:ItemsItem)->Unit) : RecyclerView.Adapter<AnyAdapter.VH>() {
+class AnyAdapter(val listener: (model: ItemsItem) -> Unit) : RecyclerView.Adapter<AnyAdapter.VH>() {
     private val banners: ArrayList<ItemsItem> = ArrayList()
 
     @SuppressLint("NotifyDataSetChanged")

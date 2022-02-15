@@ -25,11 +25,11 @@ class SearchScreen : Fragment(R.layout.screen_search) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?): Unit = with(binding) {
         super.onViewCreated(view, savedInstanceState)
         adapter = SearchAdapter {
-            val fragment= PageDetail()
-            var bundle=Bundle()
-            bundle.putString("salom",it.id)
-            fragment.arguments=bundle
-            findNavController().navigate(R.id.action_mainScreen_to_pageDetail,bundle)
+            val fragment = PageDetail()
+            var bundle = Bundle()
+            bundle.putString("salom", it.id)
+            fragment.arguments = bundle
+            findNavController().navigate(R.id.action_mainScreen_to_pageDetail, bundle)
         }
         recycler.adapter = adapter
         viewModellisteners()
@@ -41,7 +41,7 @@ class SearchScreen : Fragment(R.layout.screen_search) {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 if (query != null) {
                     viewModel.getMovie(query)
-                    progress.visibility=View.VISIBLE
+                    progress.visibility = View.VISIBLE
                 }
                 return false
             }
@@ -56,10 +56,10 @@ class SearchScreen : Fragment(R.layout.screen_search) {
     private fun viewModellisteners() = with(binding) {
         viewModel.dataFlow.onEach { data ->
             if (data != null) {
-                if (data.results!!.size==0) {
+                if (data.results!!.size == 0) {
 
-                }else{
-                    adapter.addFiles(data.results!!)
+                } else {
+                    adapter.addFiles(data.results)
                 }
             }
         }.launchIn(lifecycleScope)

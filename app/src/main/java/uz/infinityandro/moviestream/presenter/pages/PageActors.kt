@@ -39,13 +39,16 @@ class PageActors : Fragment(R.layout.page_actors) {
         receiver.setListener {
             if (it){
                 viewModel.getDataA(a.toString())
+                return@setListener
             }
         }
         receiver.setNetwork {
             if (it){
                 viewModel.getDataA(a.toString())
+                return@setNetwork
             }
         }
+        viewModel.getDataA(a.toString())
     }
 
     private fun viewModelListeners() = with(binding) {

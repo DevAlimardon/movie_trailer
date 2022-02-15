@@ -23,7 +23,7 @@ class BestMovieAdapter : RecyclerView.Adapter<BestMovieAdapter.VH>() {
     inner class VH(val binding: ItemBestMovieBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(knownForItem: KnownForItem) = with(binding) {
             Glide.with(App.instance).load(knownForItem.image).into(imageFilmActor)
-            nameFilm.setText(knownForItem.title)
+            nameFilm.text = knownForItem.title
             role.text = "role: ${knownForItem.role}"
 
         }

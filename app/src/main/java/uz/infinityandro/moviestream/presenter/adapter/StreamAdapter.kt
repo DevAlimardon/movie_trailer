@@ -8,7 +8,8 @@ import com.bumptech.glide.Glide
 import uz.infinityandro.moviestream.databinding.ItemStreamBinding
 import uz.infinityandro.moviestream.domain.data.ItemsItem
 
-class StreamAdapter(var listener:(model:ItemsItem)->Unit):RecyclerView.Adapter<StreamAdapter.VH>() {
+class StreamAdapter(var listener: (model: ItemsItem) -> Unit) :
+    RecyclerView.Adapter<StreamAdapter.VH>() {
     private val banners: ArrayList<ItemsItem> = ArrayList()
 
     @SuppressLint("NotifyDataSetChanged")
@@ -17,8 +18,9 @@ class StreamAdapter(var listener:(model:ItemsItem)->Unit):RecyclerView.Adapter<S
         this.banners.addAll(banners)
         notifyDataSetChanged()
     }
+
     inner class VH(var binding: ItemStreamBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(i: ItemsItem) = with(binding){
+        fun bind(i: ItemsItem) = with(binding) {
             Glide.with(binding.root.context).load(i.image).into(image)
             root.setOnClickListener {
                 listener(i)
@@ -28,7 +30,7 @@ class StreamAdapter(var listener:(model:ItemsItem)->Unit):RecyclerView.Adapter<S
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VH {
-        return  VH(ItemStreamBinding.inflate(LayoutInflater.from(parent.context),parent,false))
+        return VH(ItemStreamBinding.inflate(LayoutInflater.from(parent.context), parent, false))
     }
 
     override fun onBindViewHolder(holder: VH, position: Int) {

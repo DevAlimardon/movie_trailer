@@ -20,19 +20,19 @@ import uz.infinityandro.moviestream.presenter.viewmodel.impl.AnyOfMovieModelImpl
 import uz.infinityandro.moviestream.util.InternetBroadCast
 import uz.infinityandro.moviestream.utils.showToast
 
-class PageDrama:Fragment(R.layout.page_drama) {
-    private val  binding by viewBinding(PageDramaBinding::bind)
+class PageDrama : Fragment(R.layout.page_drama) {
+    private val binding by viewBinding(PageDramaBinding::bind)
     private val viewModel: AnyOfMovieModel by viewModel<AnyOfMovieModelImpl>()
-    private lateinit var adapter : AnyAdapter
+    private lateinit var adapter: AnyAdapter
     private val receiver = InternetBroadCast()
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) = with(binding){
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) = with(binding) {
         super.onViewCreated(view, savedInstanceState)
-        adapter= AnyAdapter {
-            val fragment=PageDetail()
-            var bundle=Bundle()
-            bundle.putString("salom",it.id)
-            fragment.arguments=bundle
-            findNavController().navigate(R.id.action_mainScreen_to_pageDetail,bundle)
+        adapter = AnyAdapter {
+            val fragment = PageDetail()
+            var bundle = Bundle()
+            bundle.putString("salom", it.id)
+            fragment.arguments = bundle
+            findNavController().navigate(R.id.action_mainScreen_to_pageDetail, bundle)
         }
         shimmer.startShimmer()
         recycler.adapter = adapter
@@ -41,18 +41,26 @@ class PageDrama:Fragment(R.layout.page_drama) {
             receiver,
             IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION)
         )
-        requireContext().registerReceiver(receiver, IntentFilter(WifiManager.WIFI_STATE_CHANGED_ACTION))
+        requireContext().registerReceiver(
+            receiver,
+            IntentFilter(WifiManager.WIFI_STATE_CHANGED_ACTION)
+        )
         receiver.setListener {
-            if (it){
+            if (it) {
                 viewModel.getMovie("dramas")
+                return@setListener
             }
         }
         receiver.setNetwork {
-            if (it){
+            if (it) {
                 viewModel.getMovie("dramas")
+                return@setNetwork
             }
         }
+        viewModel.getMovie("dramas")
+
     }
+
     private fun viewModelListeners() = with(binding) {
 
         viewModel.dataFlow.onEach {

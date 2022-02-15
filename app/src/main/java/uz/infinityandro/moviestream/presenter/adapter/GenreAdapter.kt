@@ -9,7 +9,8 @@ import uz.infinityandro.moviestream.app.App
 import uz.infinityandro.moviestream.databinding.ItemGenreBinding
 import uz.infinityandro.moviestream.domain.data.ActorListItemD
 
-class GenreAdapter(var listener:(model:ActorListItemD)->Unit) : RecyclerView.Adapter<GenreAdapter.VH>() {
+class GenreAdapter(var listener: (model: ActorListItemD) -> Unit) :
+    RecyclerView.Adapter<GenreAdapter.VH>() {
     private val banners: ArrayList<ActorListItemD> = ArrayList()
 
     @SuppressLint("NotifyDataSetChanged")
@@ -22,7 +23,7 @@ class GenreAdapter(var listener:(model:ActorListItemD)->Unit) : RecyclerView.Ada
     inner class VH(val binding: ItemGenreBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(itemSoon: ActorListItemD) = with(binding) {
             Glide.with(App.instance).load(itemSoon.image).into(imageFilm)
-            name.setText(itemSoon.name)
+            name.text = itemSoon.name
             root.setOnClickListener {
                 listener(itemSoon)
             }

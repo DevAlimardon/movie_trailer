@@ -70,13 +70,16 @@ class PageDetail : Fragment(R.layout.page_detail) {
         receiver.setListener {
             if (it) {
                 viewModel.getMovie(a)
+                return@setListener
             }
         }
         receiver.setNetwork {
             if (it) {
                 viewModel.getMovie(a)
+                return@setNetwork
             }
         }
+        viewModel.getMovie(a)
 
     }
 
@@ -97,23 +100,23 @@ class PageDetail : Fragment(R.layout.page_detail) {
         viewModel.dataFlow.onEach {
             if (it != null) {
                 Glide.with(requireContext()).load(it.image).into(imageFilm)
-                nameFilm.setText(it.title)
-                timeFilm.setText(it.runtimeStr)
+                nameFilm.text = it.title
+                timeFilm.text = it.runtimeStr
                 rateFilm.text = "${it.imDbRating}(IMDb)"
-                releaseDateFilm.setText(it.releaseDate)
+                releaseDateFilm.text = it.releaseDate
                 if (!it.genreList!![0].value.isNullOrEmpty()) {
-                    genre1.setText(it.genreList!![0].value)
+                    genre1.text = it.genreList[0].value
                 } else {
 
                 }
                 if (it.genreList.size >= 2) {
-                    if (!it.genreList!![1].value.isNullOrEmpty()) {
-                        genre2.setText(it.genreList!![1].value)
+                    if (!it.genreList[1].value.isNullOrEmpty()) {
+                        genre2.text = it.genreList[1].value
                     } else {
                         genre2.visibility = View.GONE
                     }
                 }
-                descriptionFilm.setText(it.plot)
+                descriptionFilm.text = it.plot
                 adapter.addFiles(it.similars!!)
                 adapterCast.addFiles(it.actorList!!)
                 viewModelData.getMovie(it.id!!)

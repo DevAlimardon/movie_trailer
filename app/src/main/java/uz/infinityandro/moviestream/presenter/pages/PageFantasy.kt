@@ -41,17 +41,23 @@ class PageFantasy : Fragment(R.layout.page_fantasy) {
             receiver,
             IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION)
         )
-        requireContext().registerReceiver(receiver, IntentFilter(WifiManager.WIFI_STATE_CHANGED_ACTION))
+        requireContext().registerReceiver(
+            receiver,
+            IntentFilter(WifiManager.WIFI_STATE_CHANGED_ACTION)
+        )
         receiver.setListener {
-            if (it){
+            if (it) {
                 viewModel.getMovie("fiction")
+                return@setListener
             }
         }
         receiver.setNetwork {
-            if (it){
+            if (it) {
                 viewModel.getMovie("fiction")
+                return@setNetwork
             }
         }
+        viewModel.getMovie("fiction")
     }
 
     private fun viewModelListeners() = with(binding) {

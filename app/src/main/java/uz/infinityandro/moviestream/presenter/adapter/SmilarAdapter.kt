@@ -9,7 +9,8 @@ import uz.infinityandro.moviestream.app.App
 import uz.infinityandro.moviestream.databinding.ItemSmilarBinding
 import uz.infinityandro.moviestream.domain.data.SimilarsItemD
 
-class SmilarAdapter(var listener:(model:SimilarsItemD)->Unit) : RecyclerView.Adapter<SmilarAdapter.VH>() {
+class SmilarAdapter(var listener: (model: SimilarsItemD) -> Unit) :
+    RecyclerView.Adapter<SmilarAdapter.VH>() {
 
     private val banners: ArrayList<SimilarsItemD> = ArrayList()
 
@@ -23,7 +24,7 @@ class SmilarAdapter(var listener:(model:SimilarsItemD)->Unit) : RecyclerView.Ada
     inner class VH(val binding: ItemSmilarBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(similarsItem: SimilarsItemD) = with(binding) {
             Glide.with(App.instance).load(similarsItem.image).into(image)
-            name.setText(similarsItem.title)
+            name.text = similarsItem.title
             root.setOnClickListener {
                 listener(similarsItem)
             }

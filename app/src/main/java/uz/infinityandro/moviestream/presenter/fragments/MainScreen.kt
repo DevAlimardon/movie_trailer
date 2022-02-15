@@ -15,10 +15,10 @@ import uz.infinityandro.moviestream.presenter.viewmodel.MainModel
 import uz.infinityandro.moviestream.presenter.viewmodel.impl.MainModelImpl
 import uz.infinityandro.moviestream.util.BottomPage
 
-class MainScreen:Fragment(R.layout.screen_main) {
-private val binding by viewBinding(ScreenMainBinding::bind)
-    private val viewModel:MainModel by viewModels<MainModelImpl>()
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?): Unit = with(binding){
+class MainScreen : Fragment(R.layout.screen_main) {
+    private val binding by viewBinding(ScreenMainBinding::bind)
+    private val viewModel: MainModel by viewModels<MainModelImpl>()
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?): Unit = with(binding) {
         super.onViewCreated(view, savedInstanceState)
         val adapter = MainAdapter(childFragmentManager, lifecycle)
         viewPager.adapter = adapter
@@ -32,7 +32,7 @@ private val binding by viewBinding(ScreenMainBinding::bind)
                 R.id.movie -> {
                     viewModel.selectPagePos(BottomPage.MOVIE)
                 }
-                R.id.search ->{
+                R.id.search -> {
                     viewModel.selectPagePos(BottomPage.SEARCH)
                 }
             }

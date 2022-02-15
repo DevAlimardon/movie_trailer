@@ -15,7 +15,7 @@ import uz.infinityandro.moviestream.app.App
 import uz.infinityandro.moviestream.databinding.ItemAnyBinding
 import uz.infinityandro.moviestream.domain.data.ItemTop
 
-class TopAdapter(var listener:(model:ItemTop)->Unit) : RecyclerView.Adapter<TopAdapter.VH>() {
+class TopAdapter(var listener: (model: ItemTop) -> Unit) : RecyclerView.Adapter<TopAdapter.VH>() {
     private val banners: ArrayList<ItemTop> = ArrayList()
 
     @SuppressLint("NotifyDataSetChanged")
@@ -24,6 +24,7 @@ class TopAdapter(var listener:(model:ItemTop)->Unit) : RecyclerView.Adapter<TopA
         this.banners.addAll(banners)
         notifyDataSetChanged()
     }
+
     inner class VH(val binding: ItemAnyBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(itemsItem: ItemTop) = with(binding) {
             root.setOnClickListener {

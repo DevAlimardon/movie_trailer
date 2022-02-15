@@ -48,13 +48,16 @@ class PageRomance : Fragment(R.layout.page_romance) {
         receiver.setListener {
             if (it) {
                 viewModel.getMovie("love")
+                return@setListener
             }
         }
         receiver.setNetwork {
             if (it) {
                 viewModel.getMovie("love")
+                return@setNetwork
             }
         }
+        viewModel.getMovie("love")
     }
 
     private fun viewModelListeners() = with(binding) {

@@ -17,23 +17,22 @@ import uz.infinityandro.moviestream.databinding.PageComedyBinding
 import uz.infinityandro.moviestream.presenter.adapter.AnyAdapter
 import uz.infinityandro.moviestream.presenter.viewmodel.AnyOfMovieModel
 import uz.infinityandro.moviestream.presenter.viewmodel.impl.AnyOfMovieModelImpl
-import uz.infinityandro.moviestream.util.Constants
 import uz.infinityandro.moviestream.util.InternetBroadCast
 import uz.infinityandro.moviestream.utils.showToast
 
 class PageComedy : Fragment(R.layout.page_comedy) {
     private val binding by viewBinding(PageComedyBinding::bind)
     private val viewModel: AnyOfMovieModel by viewModel<AnyOfMovieModelImpl>()
-    private lateinit var adapter : AnyAdapter
+    private lateinit var adapter: AnyAdapter
     private val receiver = InternetBroadCast()
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) = with(binding) {
         super.onViewCreated(view, savedInstanceState)
-        adapter= AnyAdapter {
-            val fragment=PageDetail()
-            var bundle=Bundle()
-            bundle.putString("salom",it.id)
-            fragment.arguments=bundle
-            findNavController().navigate(R.id.action_mainScreen_to_pageDetail,bundle)
+        adapter = AnyAdapter {
+            val fragment = PageDetail()
+            var bundle = Bundle()
+            bundle.putString("salom", it.id)
+            fragment.arguments = bundle
+            findNavController().navigate(R.id.action_mainScreen_to_pageDetail, bundle)
         }
         shimmer.startShimmer()
         recycler.adapter = adapter
@@ -42,19 +41,23 @@ class PageComedy : Fragment(R.layout.page_comedy) {
             receiver,
             IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION)
         )
-        requireContext().registerReceiver(receiver, IntentFilter(WifiManager.WIFI_STATE_CHANGED_ACTION))
+        requireContext().registerReceiver(
+            receiver,
+            IntentFilter(WifiManager.WIFI_STATE_CHANGED_ACTION)
+        )
         receiver.setListener {
-            if (it){
+            if (it) {
                 viewModel.getMovie("fantasy")
+                return@setListener
             }
         }
         receiver.setNetwork {
-            if (it){
+            if (it) {
                 viewModel.getMovie("fantasy")
-            }else{
-
+                return@setNetwork
             }
         }
+        viewModel.getMovie("fantasy")
     }
 
     private fun viewModelListeners() = with(binding) {

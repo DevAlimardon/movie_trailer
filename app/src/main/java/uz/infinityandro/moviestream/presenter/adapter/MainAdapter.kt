@@ -7,7 +7,6 @@ import androidx.viewpager2.adapter.FragmentStateAdapter
 import uz.infinityandro.moviestream.presenter.fragments.HomeScreen
 import uz.infinityandro.moviestream.presenter.fragments.MovieScreen
 import uz.infinityandro.moviestream.presenter.fragments.SearchScreen
-import uz.infinityandro.moviestream.presenter.fragments.SettingScreen
 
 class MainAdapter(
     private val fm: FragmentManager,

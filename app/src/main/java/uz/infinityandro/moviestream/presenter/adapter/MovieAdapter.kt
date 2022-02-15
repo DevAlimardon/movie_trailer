@@ -11,7 +11,7 @@ class MovieAdapter(
     private val lifecycle: Lifecycle
 ) : FragmentStateAdapter(fm, lifecycle) {
     override fun getItemCount(): Int {
-    return 9
+        return 9
     }
 
     override fun createFragment(position: Int): Fragment {
